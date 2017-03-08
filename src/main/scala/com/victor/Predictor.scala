@@ -8,8 +8,8 @@ import org.joda.time.{DateTime, Interval}
 
 class Predictor {
 
-  val BEGIN_FIRST_PROHIBITION_TIME = (new DateTime(1, 1, 1, 7, 0), new DateTime(1, 1, 1, 9, 30))
-  val SECOND_PROHIBITION_TIME = (new DateTime(1, 1, 1, 16, 0), new DateTime(1, 1, 1, 19, 30))
+  val FIRST_PROHIBITION_INTERVAL = (new DateTime(1, 1, 1, 7, 0), new DateTime(1, 1, 1, 9, 30))
+  val SECOND_PROHIBITION_INTERVAL = (new DateTime(1, 1, 1, 16, 0), new DateTime(1, 1, 1, 19, 30))
 
   /**
     * return true when the vehicle can road
@@ -40,8 +40,8 @@ class Predictor {
     */
   private def cantRoadTime(time: DateTime): Boolean = {
     val overrideTimeWithCustomDate = new DateTime(1, 1, 1, time.getHourOfDay, time.getMinuteOfHour)
-    new Interval(BEGIN_FIRST_PROHIBITION_TIME._1, BEGIN_FIRST_PROHIBITION_TIME._2).contains(overrideTimeWithCustomDate) ||
-      new Interval(SECOND_PROHIBITION_TIME._1, SECOND_PROHIBITION_TIME._2).contains(overrideTimeWithCustomDate)
+    new Interval(FIRST_PROHIBITION_INTERVAL._1, FIRST_PROHIBITION_INTERVAL._2).contains(overrideTimeWithCustomDate) ||
+      new Interval(SECOND_PROHIBITION_INTERVAL._1, SECOND_PROHIBITION_INTERVAL._2).contains(overrideTimeWithCustomDate)
   }
 
 

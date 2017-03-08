@@ -13,7 +13,7 @@ import org.scalatest.BeforeAndAfter
   */
 
 
-class PicoyPlacaTest extends FunSuite with BeforeAndAfter {
+class PredictorTest extends FunSuite with BeforeAndAfter {
 
   var predictor: Predictor = _
 
@@ -36,21 +36,21 @@ class PicoyPlacaTest extends FunSuite with BeforeAndAfter {
     niceHours.map(hour => assert(predictor.canRoad("PBA-123", "2017-03-7", new DateTime(2017, 7, 3, hour, 25))))
   }
 
-  test("catch bat plate CustomException") {
+  test("catch bad plate CustomException") {
     val thrown = intercept[CustomException] {
       predictor.canRoad("ABC", "2017-03-7", new DateTime(2017, 7, 3, 2, 25))
     }
     assert(thrown.msg === "bad plate string")
   }
 
-  test("catch bat date string format") {
+  test("catch bad date string format") {
     val thrown = intercept[CustomException] {
       predictor.canRoad("ABC-123", "2017-A-B", new DateTime(2017, 7, 3, 2, 25))
     }
     assert(thrown.msg === "bad date string")
   }
 
-  test("test the bad day for very plate number") {
+  test("test the bad day for every plate number") {
     assert(!predictor.canRoad("PBA-121", "2017-03-6", new DateTime(2017, 7, 6, 8, 25)))
     assert(!predictor.canRoad("PBA-122", "2017-03-6", new DateTime(2017, 7, 6, 8, 25)))
     assert(!predictor.canRoad("PBA-123", "2017-03-7", new DateTime(2017, 7, 6, 8, 25)))
