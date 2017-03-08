@@ -1,0 +1,2 @@
+Scala sample project with TDD
+to run the test please: sbt run
